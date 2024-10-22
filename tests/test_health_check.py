@@ -1,8 +1,12 @@
+import pytest
 import requests
+import os
                     
 ## Verify that app_under_construction returns correct under constuction page
 def test_app_health_check():
-    url = "https://vrubleuski.me"
+    url = os.getenv('HV_ME_WEBSITE_URL_PROD')
+    if not url:
+        pytest.fail("HV_ME_WEBSITE_URL_PROD environment variable is not set")
     response = requests.get(url, timeout=10)
     ## Verify response code is 200
     assert 200 == response.status_code
