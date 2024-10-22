@@ -19,4 +19,4 @@ jobs:
 
       - name: Run The Test
         run: |
-          pytest tests/test_health_check.py
+          pytest test_health_check.py
