@@ -19,5 +19,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests pytest
       - name: Run The Test
+        env:
+          HV_ME_WEBSITE_URL_PROD: ${{secrets.HV_ME_WEBSITE_URL_PROD}}
         run: |
           pytest tests/test_health_check.py
