@@ -2,6 +2,8 @@ name: HV Web App Health Check
 
 on:
   workflow_dispatch: # Allows manual triggering
+  schedule:
+    - cron: '0 */3 * * *'  # Runs every 3 hours
 
 jobs:
   test:
@@ -10,14 +12,17 @@ jobs:
     steps:
       - name: Checkout Test Repository
         uses: actions/checkout@v4
+        
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install requests pytest
+
       - name: Run The Test
         env:
           HV_ME_WEBSITE_URL_PROD: ${{secrets.HV_ME_WEBSITE_URL_PROD}}
